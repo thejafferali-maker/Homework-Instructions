@@ -142,8 +142,8 @@ Try binwidths of 25, 50, and 100. Which gives you the most useful view of the da
 ```{r price-hist-experiments}
 # Try binwidth = 25
 ggplot(data = edibnb, mapping = aes(x = price)) +
-  geom_histogram(binwidth = 25) +
-  facet_wrap(~neighbourhood)
+  geom_histogram(binwidth = 50) +
+  facet_wrap(~neighbourhood,)
 
 # Try binwidth = 50
 
@@ -152,6 +152,7 @@ ggplot(data = edibnb, mapping = aes(x = price)) +
 ```
 
 *Which binwidth did you choose and why?*
+50 gives the most useful view because it shows the price distribution clearly without being too crowded or too simplified. A binwidth of 25 creates too many bars, while 100 groups too many prices together, hiding important variation
 
  b) Experiment with facet layout*
 
@@ -162,6 +163,7 @@ Try these three options:
 - `facet_wrap(~neighbourhood, nrow = 1)` - arranges horizontally
 
 *Which layout did you choose and why?*
+The grid layout is easier to read because it spreads the neighborhoods across multiple rows and columns, making the histograms larger and easier to compare. The vertical and horizontal layouts make the plots too long or too compressed.
 
  c) Create your final visualization
 
@@ -170,8 +172,11 @@ Try these three options:
 ```
 
 Use your chosen binwidth and layout:
-```{r final-price-histogram, eval = FALSE}
+```{r final-price-histogram, eval =TRUE}
 # Your final code here
+ggplot(data = edibnb, mapping = aes(x = price)) +
+  geom_histogram(binwidth = 50) +
+  facet_wrap(~neighbourhood)
 ```
 
 *After completing Exercise 3:*
