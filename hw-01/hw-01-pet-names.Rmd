@@ -1,6 +1,6 @@
 ---
 title: "HW 01 - Pet names"
-author: "[your name here]"
+author: "Jaffer Ali"
 subtitle: "Meet the toolkit"
 output: 
   tufte::tufte_html:
@@ -374,16 +374,18 @@ ggplot(comb_name_props, aes(x = cat_prop, y = dog_prop)) +
   labs(x = "Proportion of cats", y = "Proportion of dogs") +
   xlim(0.002, 0.01) +
   ylim(0.002, 0.01) +
-  ggimage::geom_emoji(
-      image = "1f436", aes(x = 0.003, y = 0.009), size = 0.1
-      ) +
-  ggimage::geom_emoji(
-      image = "1f431", aes(x = 0.009, y = 0.003), size = 0.1
-      )
+ annotate("text", x = 0.003, y = 0.009, label = "🐶", size = 5) +
+annotate("text", x = 0.009, y = 0.003, label = "🐱", size = 5)
+
 ```
 
 a.  What names are more common for cats than dogs? The ones above the line or the ones below the line?
+
+Names that are more common for cats are the ones below the line
+
 b.  Is the relationship between the two variables (proportion of cats with a given name and proportion of dogs with a given name) positive or negative? What does this mean in context of the data?
+
+The relationship is positive. This means that names that are common for cats also tend to be common for dogs.
 
 *After completing this exercise:*
 
