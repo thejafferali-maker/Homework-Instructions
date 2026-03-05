@@ -1,6 +1,6 @@
 ---
 title: "HW 02 - Airbnb listings in Edinburgh"
-author: "[Your Name]"
+author: "Jaffer Ali"
 output: 
   tufte::tufte_html:
     css: ../lab.css
@@ -93,12 +93,15 @@ You can find out more about the dataset by inspecting its documentation, which y
 **Hint:** The Markdown Quick Reference sheet has an example of inline R code that might be helpful. You can access it from the Help menu in RStudio.
 ```
 
-1.  How many observations (rows) does the dataset have? Instead of hard coding the number in your answer, use inline code.
+1.  How many observations (rows) does the dataset have? Instead of hard coding the number in your answer, use inline code. 
+13245 rows
 
 **Hint:** In your answer, type a backtick, then r, then space, then `nrow(edibnb)`, then close with another backtick. When you knit, this will show the actual number instead of the code.
 
 
 2.  Run `View(edibnb)` in your Console to view the data in the data viewer. What does each row in the dataset represent?
+
+Each row in the dataset represents one Airbnb listing in Edinburgh.
 
 *After completing Exercises 1-2:*
 
