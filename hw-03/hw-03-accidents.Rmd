@@ -74,10 +74,12 @@ The data can be found in the **dsbox** package, and it's called `accidents`. Sin
 
 # Exercises
 
-1.  How many observations (rows) does the dataset have? Instead of hard coding the number in your answer, use inline code.
+1.  How many observations (rows) does the dataset have? Instead of hard coding the number in your answer, use inline code. 768
 
 
-2.  Run `View(accidents)` in your Console to view the data in the data viewer. What does each row in the dataset represent?
+2.  Run `View(accidents)` in your Console to view the data in the data viewer. What does each row in the dataset represent? 
+Each row represents a single recorded road traffic accident, including information about its location, time, severity, vehicles involved, and casualties.
+
 
 🧶 Knit → ✅ Commit with message `"Completed Exercises 1-2"` → ⬆️ Push
 
@@ -95,7 +97,7 @@ Your plot should include:
 **Hint:** Use `mutate()` with `if_else()`. The condition should check if `day_of_week` is in the vector `c("Saturday", "Sunday")`
 
 ```{r create-day-type, eval = FALSE}
-accidents %
+accidents % 
   mutate(day_of_week_type = if_else(
     ___ %in% c(___, ___), 
     "___", 
