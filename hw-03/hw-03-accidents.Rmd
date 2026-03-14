@@ -96,12 +96,12 @@ Your plot should include:
 
 **Hint:** Use `mutate()` with `if_else()`. The condition should check if `day_of_week` is in the vector `c("Saturday", "Sunday")`
 
-```{r create-day-type, eval = FALSE}
-accidents % 
+```{r create-day-type, eval = TRUE}
+accidents <- accidents %>%
   mutate(day_of_week_type = if_else(
-    ___ %in% c(___, ___), 
-    "___", 
-    "___"
+    day_of_week %in% c("Saturday", "Sunday"), 
+    "Weekend", 
+    "Weekday"
   ))
 ```
 
@@ -114,18 +114,21 @@ accidents %
 - Use `facet_wrap()` to create separate plots for weekday vs. weekend
 - Add `theme_minimal()` and appropriate labels
 
-```{r accident-density-plot, eval = FALSE}
-ggplot(data = ___, aes(x = ___, fill = ___)) +
-  geom_density(alpha = ___) +
-  facet_wrap(~___, ncol = ___) +
-  ___ +
+```{r accident-density-plot, eval = TRUE}
+ggplot(data = accidents, aes(x = time, fill = severity)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~day_of_week_type, ncol = 2) +
+  theme_minimal() +
   labs(
-    title = "___",
-    subtitle = "___",
-    x = "___",
-    y = "___",
-    fill = "___"
-  )
+    title = "Distribution of Accidents by Time of Day",
+    subtitle = "Comparing weekday vs weekend accidents",
+    x = "Time of Day",
+    y = "Density",
+    fill = "Severity"
+  ) +
+  scale_x_time(breaks = hms::as_hms(c("00:00:00", "06:00:00", "12:00:00", "18:00:00", "24:00:00")),
+               labels = c("00:00", "06:00", "12:00", "18:00", "24:00")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 **Interpretation (2-3 sentences):** Describe what patterns you observe:
@@ -134,6 +137,7 @@ ggplot(data = ___, aes(x = ___, fill = ___)) +
 - How does the severity of accidents vary by time of day?
 - Are there any notable differences between weekdays and weekends?
 
+On weekdays, accidents peak sharply around 17:00–18:00, likely reflecting rush hour traffic, with a smaller morning peak around 08:00–09:00. On weekends, the distribution is broader with a later single peak around 17:00–18:00 and no morning rush hour spike. Fatal accidents appear more evenly spread throughout the day on weekdays, while slight accidents dominate the evening peak in both weekday and weekend patterns.
 
 *After completing Exercise 3:*
 
