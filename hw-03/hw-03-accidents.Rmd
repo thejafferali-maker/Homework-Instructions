@@ -160,16 +160,35 @@ On weekdays, accidents peak sharply around 17:00–18:00, likely reflecting rush
 - Do certain vehicle types have more accidents in specific conditions?
 
 **Your visualization:**
-```{r custom-visualization, eval = FALSE}
+```{r custom-visualization, eval = TRUE}
 # Your code here
+accidents %>%
+  filter(light %in% c("Daylight", "Darkness: lights lit", "Darkness: no lighting")) %>%
+  filter(road_type %in% c("Single carriageway", "Dual carriageway", "Roundabout")) %>%
+  ggplot(aes(x = road_type, fill = severity)) +
+  geom_bar(position = "fill") +
+  facet_wrap(~light, ncol = 3) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Accident Severity by Road Type and Light Conditions",
+    subtitle = "Proportion of severity levels across road and lighting types",
+    x = "Road Type",
+    y = "Proportion",
+    fill = "Severity"
+  )
 ```
 
 **What question does your visualization answer?**
-
+Does the proportion of fatal and serious accidents vary by road type depending on lighting conditions?
 
 **What variables were used:** 
 
+severity, road_type, and light
+
 **Interpretation (3-4 sentences):** What patterns or insights does your visualization reveal?
+
+In daylight conditions, all types of roads experience slight accidents, with roundabouts experiencing the least number of serious accidents. Dual carriageways experience a higher proportion of serious accidents on the roundabouts. In darkness without lighting, there is a noticeable increase in the proportion of both fatals and serious accidents on single and dual carriageways. Thus, both the type of road and the lighting of that road contribute to the likelihood of accidents of that severity occurring on those roads. The combination of driving on a road of this type without lighting makes for the most dangerous road condition.
 
 *After completing Exercise 4:*
 
