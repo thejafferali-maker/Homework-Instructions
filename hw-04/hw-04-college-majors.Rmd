@@ -234,7 +234,7 @@ Fill-in the blanks in the code below and change eval = TRUE to test your output.
 ```
 
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 college_recent_grads %>%
   group_by(major_category) %>%
   summarise(median_income = median(median)) %>%
@@ -245,7 +245,8 @@ college_recent_grads %>%
 
 ```{r}
 college_recent_grads %>%
-  count(major_category)
+  count(major_category) %>%
+  arrange(n)
 ```
 
 🧶 Knit → ✅ Commit with message `"Completed Exercise 1-7"` → ⬆️ Push
