@@ -257,7 +257,7 @@ One of the sections of the [FiveThirtyEight story](https://fivethirtyeight.com/f
 
 First, let's create a new vector called `stem_categories` that lists the major categories that are considered STEM fields.
 
-```{r}
+```{r eval=TRUE}
 stem_categories <- c("Biology & Life Science",
                      "Computers & Mathematics",
                      "Engineering",
@@ -266,7 +266,7 @@ stem_categories <- c("Biology & Life Science",
 
 Then, we can use this to create a new variable in our data frame indicating whether a major is STEM or not.
 
-```{r}
+```{r eval=TRUE}
 college_recent_grads <- college_recent_grads %>%
   mutate(major_type = ifelse(major_category %in% stem_categories, "stem", "not stem"))
 ```
@@ -292,8 +292,7 @@ We can use the logical operators to also `filter` our data for STEM majors whose
 
 ```{r}
 college_recent_grads %>%
-  filter(
-    major_type == "stem",
+  filter(major_type == "stem",
     median < 36000
   )
 ```
@@ -302,14 +301,14 @@ college_recent_grads %>%
 
 **Hint:** Use `filter()` with two conditions, then `select()` the relevant variables, then `arrange()` appropriately.
 
-```{r stem-below-median, eval=FALSE}
+```{r stem-below-median, eval=TRUE}
 college_recent_grads %>%
   filter(
-    ___ == "___",
-    ___ <= ___
+    major_type == "stem",
+    median <= 36000
   ) %>%
-  select(___, ___, ___, ___) %>%
-  arrange(desc(___))
+  select(major, median, p25th, p75th) %>%
+  arrange(desc(median))
 ```
 
 
@@ -318,14 +317,16 @@ college_recent_grads %>%
 
 9.  Create a scatterplot of median income vs. proportion of women in that major, coloured by whether the major is in a STEM field or not. Describe the association between these three variables.
 
-```{r women-income-stem, eval = FALSE}
-ggplot(data = college_recent_grads, aes(x = ___, y = ___, color = ___)) +
+Majors with higher proportions of women tend to have lower median incomes. STEM majors cluster toward lower proportions of women and higher incomes, while non-STEM majors show the opposite pattern, suggesting a possible relationship between gender composition and earnings.
+
+```{r women-income-stem, eval = TRUE}
+ggplot(data = college_recent_grads, aes(x = sharewomen, y = median, color = major_type)) +
   geom_point() +
   labs(
-    x = "___",
-    y = "___",
-    color = "___",
-    title = "___"
+    x = "Proportion of Women",
+    y = "Median Income",
+    color = "Major Type",
+    title = "Median Income vs. Proportion of Women by Major Type"
   )
 ```
 
@@ -340,14 +341,22 @@ ggplot(data = college_recent_grads, aes(x = ___, y = ___, color = ___)) +
 - Do majors with higher proportions of full-time workers have higher median incomes?
 
 **Your research question:** 
+How does the proportion of women vary across major categories?
 
 
 **Your analysis (code and visualization/summary statistics):**
-```{r custom-analysis}
+```{r custom-analysis} 
 # Your code here
+
+college_recent_grads %>%
+  group_by(major_category) %>%
+  summarise(avg_sharewomen = mean(sharewomen, na.rm = TRUE)) %>%
+  arrange(desc(avg_sharewomen))
 ```
 
 **Your findings (3-4 sentences):**
+
+The proportion of women varies substantially across major categories, with Education and Psychology & Social Work having the highest average share of women. In contrast, Engineering and Computers & Mathematics have the lowest proportions of women. This aligns with well-documented gender gaps in technical fields. These differences in gender composition may also partly explain the income disparities observed across major categories in earlier exercises.
 
 🧶 Knit → ✅ Commit with message `"Completed Exercise 8-10"` → ⬆️ Push
 
